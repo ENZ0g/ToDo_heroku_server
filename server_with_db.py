@@ -12,7 +12,7 @@ app = bottle.Bottle()
 @enable_cors
 @app.route('/api/tasks')
 def index():
-    tasks = [db.task_to_dict(task) for task in db.get_all_tasks(session)]
+#     tasks = [db.task_to_dict(task) for task in db.get_all_tasks(session)]
 #     return {'tasks': tasks}
     return 'ok'
 
