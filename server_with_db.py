@@ -15,7 +15,7 @@ def index():
     tasks = [db.task_to_dict(task) for task in db.get_all_tasks(session)]
     return {'tasks': sorted(tasks, key=lambda x: x['uid']),
             'total': len(tasks),
-            'not_completed': db.get_not_completed_tasks(session)}}
+            'not_completed': db.get_not_completed_tasks(session)}
 
 
 @enable_cors
