@@ -21,7 +21,7 @@ def create_session():
     engine = sqla.create_engine(DB_PATH)
     
     metadata = sqla.MetaData()
-    todos_table = Table('todos_table',
+    todos_table = sqla.Table('todos_table',
                         metadata,
                         sqla.Column('uid', sqla.INTEGER, primary_key=True, autoincrement=True),
                         sqla.Column('description', sqla.TEXT),
