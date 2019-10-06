@@ -36,7 +36,7 @@ def add_task():
     return 'The task is added successfully'
 
 
-app.install(CorsPlugin(origins=['http://localhost:8080']))
+app.install(CorsPlugin(origins=os.environ.get('CORS_URLS')))
 
 if os.environ.get('APP_LOCATION') == 'heroku':
     bottle.run(app,
