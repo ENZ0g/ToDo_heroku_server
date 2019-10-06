@@ -13,18 +13,23 @@ app = bottle.Bottle()
 @app.route('/api/tasks')
 def index():
     tasks = [db.task_to_dict(task) for task in db.get_all_tasks(session)]
-    return {'tasks': sorted(tasks, key=lambda x: x['uid'])}
+    return {'tasks': sorted(tasks, key=lambda x: x['uid']),
+            'total': len(tasks),
+            'not_completed': db.get_not_completed_tasks(session)}}
 
 
 @enable_cors
 @app.route('/api/tasks/<uid:int>', method=['PUT', 'DELETE'])
 def change_task(uid):
-    if bottle.request.method == 'DELETE':
-        db.delete_task(session, uid)
-        return 'The task is deleted successfully'
-    elif bottle.request.method == 'PUT':
-        db.make_task_completed(session, uid)
-        return 'The task is completed successfully'
+    try:
+        if bottle.request.method == 'DELETE':
+            db.delete_task(session, uid)
+            return 'The task is deleted successfully'
+        elif bottle.request.method == 'PUT':
+            db.make_task_completed(session, uid)
+            return 'The task is completed successfully'
+    except IndexError:
+        return bottle.HTTPError(404, f'No task with uid {uid}')
 
 
 @enable_cors
