@@ -19,6 +19,15 @@ class TodoItem(Base):
 
 def create_session():
     engine = sqla.create_engine(DB_PATH)
+    
+    metadata = sqla.MetaData()
+    todos_table = Table('todos_table',
+                        metadata,
+                        sqla.Column('uid', sqla.INTEGER, primary_key=True, autoincrement=True),
+                        sqla.Column('description', sqla.TEXT),
+                        sqla.Column('is_completed', sqla.INTEGER, default=0))
+    
+    metadata.create_all(engine)
     Sessions = sessionmaker(engine)
     return Sessions()
 
