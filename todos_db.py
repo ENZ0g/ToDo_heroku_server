@@ -62,3 +62,8 @@ def delete_task(session, uid):
     task = get_task_by_id(session, uid)
     session.delete(task)
     session.commit()
+
+
+def get_not_completed_tasks(session):
+    query = session.query(TodoItem).filter(TodoItem.is_completed == '0').count()
+    return query
