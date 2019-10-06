@@ -1,9 +1,10 @@
 import sqlalchemy as sqla
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+import os
 
 
-DB_PATH = 'sqlite:///todos.db'
+DB_PATH = os.environ.get('DATABASE_URL')
 
 Base = declarative_base()
 
