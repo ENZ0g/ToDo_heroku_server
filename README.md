@@ -1,2 +1,1 @@
-# ToDo_heroku_server
-Server with sqlite DB for task manager
+Server with horoku postgresql DB for [task manager](https://enz0g.github.io/todoapp/)
